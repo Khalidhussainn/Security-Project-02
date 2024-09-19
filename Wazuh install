@@ -1,65 +1,131 @@
+# Roadmap for Setting Up Wazuh with the ELK Stack
 
-Step-by-Step Wazuh Installation Guide
+## Step 1: Install Wazuh Manager
 
+1. **Prepare the System: Update Your Package Lists**
 
+    ```bash
+    sudo apt update
+    ```
 
-1. Create a Directory for Wazuh
+2. **Install Wazuh Repository**
 
-mkdir wazuh
-cd wazuh
+    ```bash
+    curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | sudo apt-key add -
+    echo "deb https://packages.wazuh.com/4.x/apt/ stable main" | sudo tee /etc/apt/sources.list.d/wazuh.list
+    sudo apt update
+    ```
 
+3. **Install Wazuh Manager**
 
+    ```bash
+    sudo apt install wazuh-manager
+    ```
 
+## Step 2: Install Wazuh Agent (on Endpoints)
 
-2. Download the Wazuh Installation Script
+1. **Add Wazuh Repository and Install the Wazuh Agent**
 
-wget https://packages.wazuh.com-install.sh
+    ```bash
+    sudo apt install wazuh-agent
+    ```
 
+2. **Configure the Wazuh Agent**
 
+    Edit the agent’s configuration file `/var/ossec/etc/ossec.conf` and replace `<MANAGER_IP>` with your Wazuh Manager’s IP.
 
-3. Download config.yml file with the following command:
+    ```xml
+    <server>
+       <address>MANAGER_IP</address>
+    </server>
+    ```
 
-wget https://packages.wazuh.com/4.9/config.yml
+3. **Start the Wazuh Agent**
 
-4. Switch to Root User
-sudo su
+    ```bash
+    sudo systemctl start wazuh-agent
+    ```
 
+## Step 3: Install the ELK Stack
 
-5. Make the Installation Script Executable
-chmod +x wazuh-install.sh
+1. **Install Elasticsearch**
 
-6. Edit the Configuration File
-Open the config.yml file in a text editor to customize it:
-nano config.yml 
-//
+    - **Download and Install the Elasticsearch Public Signing Key**
 
+      ```bash
+      wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+      ```
 
+    - **Add Elasticsearch Repository**
 
-7. Generate Configuration Files
-./wazuh-install.sh -i --generate-config-files
+      ```bash
+      echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
+      sudo apt update
+      ```
 
+    - **Install Elasticsearch**
 
+      ```bash
+      sudo apt install elasticsearch
+      ```
 
-8. List the files to ensure everything has been downloaded and generated correctly:
+2. **Install Logstash**
 
-ls
+    ```bash
+    sudo apt install logstash
+    ```
 
+3. **Install Kibana**
 
+    ```bash
+    sudo apt install kibana
+    ```
 
-9. Install Wazuh Indexer (node-1)
-./wazuh-install.sh -i --wazuh-indexer node-1
+## Step 4: Configure Wazuh with ELK
 
+1. **Integrate Wazuh with Elasticsearch**
 
-10. Start the Wazuh Cluster
-./wazuh-install.sh -i --start-cluster
+    ```bash
+    sudo apt install wazuh-elastic7
+    ```
 
+2. **Configure Logstash for Wazuh**
 
-11. Install Wazuh Server (wazuh-1)
-./wazuh-install.sh -i --wazuh-server wazuh-1
+    - **Install the Wazuh Logstash Module**
 
+      ```bash
+      sudo apt install wazuh-logstash
+      ```
 
+    - **Configure Logstash**
 
-12.Finally,Install Wazuh Dashboard
+      Edit the Logstash configuration file to set up the input, filter, and output plugins for Wazuh.
 
-./wazuh-install.sh -i --wazuh-dashboard dashboard
+3. **Configure Kibana for Wazuh**
 
+    ```bash
+    sudo apt install wazuh-kibana
+    ```
+
+4. **Start and Enable Services**
+
+    ```bash
+    sudo systemctl enable elasticsearch
+    sudo systemctl enable kibana
+    sudo systemctl enable logstash
+    sudo systemctl start elasticsearch
+    sudo systemctl start kibana
+    sudo systemctl start logstash
+    ```
+
+## Step 5: Access the Wazuh Dashboard
+
+1. **Open Your Web Browser and Access Kibana (Wazuh’s Dashboard)**
+
+    ```plaintext
+    http://<KIBANA_IP>:5601
+    ```
+
+2. **Use the Kibana Interface**
+
+    Visualize Wazuh alerts and monitor your environment.
