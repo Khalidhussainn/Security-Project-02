@@ -68,7 +68,6 @@ ls
 # Integrating ELK with the Wazuh
 
 
-
 ## Step 1 Elasticsearch Installation and Configuration
 
 1. **Import the Elasticsearch GPG Key**
@@ -78,15 +77,15 @@ ls
       ```
 
 2. **Add the Elastic Source List**
-       ```bash
+   ```bash
       echo "deb [signed-by=/usr/share/keyrings/elastic.gpg] https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
       ```
 3. **Update Package Lists**
-       ```bash
+   ```bash
       sudo apt update
       ```
 4. **Install Elasticsearch**
-       ```bash
+   ```bash
       sudo apt install elasticsearch
       ```
 5. **Configure Elasticsearch (edit elasticsearch.yml)**
