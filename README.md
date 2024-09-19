@@ -1,6 +1,6 @@
 # Step-by-Step Wazuh Installation Guide
 
-#### 1. — **Create a Directory for Wazuh**
+#### 1. **Create a Directory for Wazuh**
 ```bash
 mkdir wazuh
 cd wazuh
@@ -69,39 +69,39 @@ ls
 
 
 
-##   Elasticsearch Installation and Configuration
 
 ## Step 1 — Elasticsearch Installation and Configuration
 
-# Import the Elasticsearch GPG Key
- ```bash
-curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elastic.gpg
-```
+    - **Import the Elasticsearch GPG Key**
 
-# Add the Elastic Source List
- ```bash
-echo "deb [signed-by=/usr/share/keyrings/elastic.gpg] https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
-```
-# Update Package Lists
- ```bash
-sudo apt update
-```
-# Install Elasticsearch
- ```bash
-sudo apt install elasticsearch
-```
-# Configure Elasticsearch (edit elasticsearch.yml)
- ```bash
-sudo nano /etc/elasticsearch/elasticsearch.yml
-```
+       ```bash
+      curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elastic.gpg
+      ```
 
-# Start and Enable Elasticsearch
- ```bash
-sudo systemctl start elasticsearch
-```
- ```bash
-sudo systemctl enable elasticsearch
-```
+    - **Add the Elastic Source List**
+       ```bash
+      echo "deb [signed-by=/usr/share/keyrings/elastic.gpg] https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
+      ```
+    - **Update Package Lists**
+       ```bash
+      sudo apt update
+      ```
+    - **Install Elasticsearch**
+       ```bash
+      sudo apt install elasticsearch
+      ```
+    - **Configure Elasticsearch (edit elasticsearch.yml)**
+       ```bash
+      sudo nano /etc/elasticsearch/elasticsearch.yml
+      ```
+
+    - **Start and Enable Elasticsearch**
+       ```bash
+      sudo systemctl start elasticsearch
+      ```
+       ```bash
+      sudo systemctl enable elasticsearch
+      ```
 
 
 
