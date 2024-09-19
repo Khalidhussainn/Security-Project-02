@@ -65,35 +65,50 @@ ls
 
 
 
-# the following is just for the Testing 
+# Integrating ELK with the Wazuh
 
 
 
-# Roadmap for Setting Up Wazuh with the ELK Stack
+##   Elasticsearch Installation and Configuration
 
-## Step 1: Install Wazuh Manager
+## Step 1 — Elasticsearch Installation and Configuration
 
-1. **Prepare the System: Update Your Package Lists**
+# Import the Elasticsearch GPG Key
+ ```bash
+curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elastic.gpg
+```
 
-    ```bash
-    sudo apt update
-    ```
+# Add the Elastic Source List
+ ```bash
+echo "deb [signed-by=/usr/share/keyrings/elastic.gpg] https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
+```
+# Update Package Lists
+ ```bash
+sudo apt update
+```
+# Install Elasticsearch
+ ```bash
+sudo apt install elasticsearch
+```
+# Configure Elasticsearch (edit elasticsearch.yml)
+ ```bash
+sudo nano /etc/elasticsearch/elasticsearch.yml
+```
 
-2. **Install Wazuh Repository**
+# Start and Enable Elasticsearch
+ ```bash
+sudo systemctl start elasticsearch
+```
+ ```bash
+sudo systemctl enable elasticsearch
+```
 
-    ```bash
-    curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | sudo apt-key add -
-    echo "deb https://packages.wazuh.com/4.x/apt/ stable main" | sudo tee /etc/apt/sources.list.d/wazuh.list
-    sudo apt update
-    ```
 
-3. **Install Wazuh Manager**
 
-    ```bash
-    sudo apt install wazuh-manager
-    ```
 
-## Step 2: Install Wazuh Agent (on Endpoints)
+
+
+## Step 2 — Kibana Dashboard installation and configuration
 
 1. **Add Wazuh Repository and Install the Wazuh Agent**
 
@@ -117,14 +132,14 @@ ls
     sudo systemctl start wazuh-agent
     ```
 
-## Step 3: Install the ELK Stack
+## Step 3 — Installing and Configuring Logstash
 
-1. **Install Elasticsearch**
+1. **Install Logstash with this command:**
 
     - **Download and Install the Elasticsearch Public Signing Key**
 
       ```bash
-      wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+      sudo apt install logstash
       ```
 
     - **Add Elasticsearch Repository**
