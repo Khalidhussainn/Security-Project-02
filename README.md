@@ -59,13 +59,6 @@ ls
 #### 12. ***Install Wazuh Dashboard***
 ```bash
 ./wazuh-install.sh -i --wazuh-dashboard dashboard
-
-
-
-
-
-
-
 ```
 
 
