@@ -6,12 +6,12 @@ mkdir wazuh
 cd wazuh
 ```
 
-#### 2. Download the Wazuh Installation Script
+#### 2. ***Download the Wazuh Installation Script***
 
 ```bash
 wget https://packages.wazuh.com/4.9/wazuh-install.sh
 ```
-#### 3. Download config.yml file with the following command:
+#### 3. **Download config.yml file with the following command:**
 
 ```bash
 wget https://packages.wazuh.com/4.9/config.yml
