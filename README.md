@@ -74,37 +74,41 @@ ls
 
 ## Step 2 Elasticsearch Installation and Configuration
 
-1. **Import the Elasticsearch GPG Key**
+   1. **Import the Elasticsearch GPG Key**
 
-```bash
-curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elastic.gpg
-```
+      ```bash
+      curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elastic.gpg
+      ```
 
-2. **Add the Elastic Source List**
+   2. **Add the Elastic Source List**
    
-```bash
-echo "deb [signed-by=/usr/share/keyrings/elastic.gpg] https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
-```
-3. **Update Package Lists**
-```bash
-sudo apt update
-```
-4. **Install Elasticsearch**
-```bash
-sudo apt install elasticsearch
-```
-5. **Configure Elasticsearch (edit elasticsearch.yml)**
-```bash
-sudo nano /etc/elasticsearch/elasticsearch.yml
-```
+      ```bash
+      echo "deb [signed-by=/usr/share/keyrings/elastic.gpg] https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
+      ```
+   3. **Update Package Lists**
+   
+      ```bash
+      sudo apt update
+      ```
+   5. **Install Elasticsearch**
+   
+      ```bash
+      sudo apt install elasticsearch
+      ```
+   6. **Configure Elasticsearch (edit elasticsearch.yml)**
+   
+      ```bash
+      sudo nano /etc/elasticsearch/elasticsearch.yml
+      ```
 
-6. **Start and Enable Elasticsearch**
-```bash
-sudo systemctl start elasticsearch
-```
-```bash
-    sudo systemctl enable elasticsearch
-```
+   7. **Start and Enable Elasticsearch**
+   
+      ```bash
+      sudo systemctl start elasticsearch
+      ```
+      ```bash
+      sudo systemctl enable elasticsearch
+      ```
 
 
 
