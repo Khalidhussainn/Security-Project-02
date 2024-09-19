@@ -113,6 +113,12 @@
       ```bash
       sudo systemctl enable elasticsearch
       ```
+   - **You can test whether your Elasticsearch service is running by sending an HTTP request:**
+   - 
+      ```bash
+      curl -X GET "localhost:9200"
+      ```
+     
 
 
 
