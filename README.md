@@ -51,12 +51,12 @@ ls
 ```bash
 ./wazuh-install.sh -i --start-cluster
 ```
-# 11. Install Wazuh Server (wazuh-1)
+### 11. Install Wazuh Server (wazuh-1)
 
 ```bash
 ./wazuh-install.sh -i --wazuh-server wazuh-1
 ```
-# 12. Install Wazuh Dashboard
+#### 12. Install Wazuh Dashboard
 ```bash
 ./wazuh-install.sh -i --wazuh-dashboard dashboard
 ```
