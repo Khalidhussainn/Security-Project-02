@@ -1,6 +1,6 @@
 # Step-by-Step Wazuh Installation Guide
 
-#### 1. Create a Directory for Wazuh
+*** 1. Create a Directory for Wazuh ***
 ```bash
 mkdir wazuh
 cd wazuh
