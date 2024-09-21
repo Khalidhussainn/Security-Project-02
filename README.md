@@ -234,3 +234,95 @@
       systemctl enable filebeat
       systemctl start filebeat
       ```
+ - **To ensure that Filebeat has been successfully installed**
+      ```bash
+      filebeat test output
+      ```
+      <details>
+         <summary>Output</summary>   
+      
+      ```bash
+       elasticsearch: https://127.0.0.1:9200...
+         parse url... OK
+         connection...
+           parse host... OK
+           dns lookup... OK
+           addresses: 127.0.0.1
+           dial up... OK
+         TLS...
+           security: server's certificate chain verification is enabled
+           handshake... OK
+           TLS version: TLSv1.3
+           dial up... OK
+         talk to server... OK
+         version: 7.17.6
+      ```
+      </details>
+
+    
+### Step 6: Kibana Installation
+ - **Install the Kibana package:**
+      ```bash
+      apt-get install kibana=7.17.6
+      ```
+
+ - **Copy Elasticsearch certificates to Kibana:**
+
+      ```bash
+      mkdir /etc/kibana/certs/ca -p
+      cp -R /etc/elasticsearch/certs/ca/ /etc/kibana/certs/
+      cp /etc/elasticsearch/certs/elasticsearch.key /etc/kibana/certs/kibana.key
+      cp /etc/elasticsearch/certs/elasticsearch.crt /etc/kibana/certs/kibana.crt
+      chown -R kibana:kibana /etc/kibana/
+      chmod -R 500 /etc/kibana/certs
+      chmod 440 /etc/kibana/certs/ca/ca.* /etc/kibana/certs/kibana.*
+
+      ```
+ - **Download the Kibana configuration file:**
+      ```bash
+      curl -so /etc/kibana/kibana.yml https://packages.wazuh.com/4.3/tpl/elastic-basic/kibana_all_in_one.yml
+      ```
+
+
+ - **Edit the kibana file to add the Password:**
+      ```bash
+      /etc/kibana/kibana.yml
+      ```
+
+      <details>
+         <summary>Output</summary>   
+      
+      ```bash
+      .
+      .
+      elasticsearch.password: <elasticsearch_password>
+      .
+      .
+      ```
+      </details>
+
+      
+ - **Create Kibana data directory: /usr/share/kibana/data**
+   
+      ```bash
+      mkdir /usr/share/kibana/data
+      chown -R kibana:kibana /usr/share/kibana
+      ```
+ - **Install the Wazuh Kibana plugin:**
+      ```bash
+      cd /usr/share/kibana
+      sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.3.11_7.17.6-1.zip
+      ```
+      
+ - **Link Kibana's socket to privileged port 443:**
+
+      ```bash
+      setcap 'cap_net_bind_service=+ep' /usr/share/kibana/node/bin/node
+      ```
+      
+ - **Enable and start the Kibana service:**
+      ```bash
+      systemctl daemon-reload
+      systemctl enable kibana
+      systemctl start kibana
+      ```
