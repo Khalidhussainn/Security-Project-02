@@ -111,7 +111,7 @@
 
  - **To check that the installation was made successfully:**
       ```bash
-      /usr/share/elasticsearch/bin/elasticsearch-setup-passwords auto
+      curl -XGET https://localhost:9200 -u elastic:<elastic_password> -k
       ```
 
       <details>
