@@ -108,3 +108,38 @@
   PASSWORD elastic = AN4UeQGA7HGl5iHpMla7
 ```
 
+### Step 4: Wazuh Installation
+
+ - **Add the Wazuh repository:**
+
+      ```bash
+      curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | gpg --no-default-keyring --keyring gnupg-ring:/usr/share/keyrings/wazuh.gpg --import && chmod 644       /usr/share/keyrings/wazuh.gpg
+      ```
+
+ - **Add the Wazuh repository to the sources list:**
+      ```bash
+      echo "deb [signed-by=/usr/share/keyrings/wazuh.gpg] https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list 
+      ```
+
+
+ - **Update the package information:**
+      ```bash
+      apt-get update
+      ```
+ - **Install the Wazuh manager:**
+      ```bash
+      apt-get install wazuh-manager=4.3.11-1
+      ```
+      
+ - **Enable and start the Wazuh manager service:**
+      ```bash
+      systemctl daemon-reload
+      systemctl enable wazuh-manager
+      systemctl start wazuh-manager
+      ```
+
+
+
+
+
+      
