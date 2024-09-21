@@ -109,6 +109,41 @@
       ```
       </details>
 
+ - **To check that the installation was made successfully:**
+      ```bash
+      /usr/share/elasticsearch/bin/elasticsearch-setup-passwords auto
+      ```
+
+      <details>
+         <summary>Output</summary>   
+      
+      ```bash
+            {
+              "name" : "elasticsearch",
+              "cluster_name" : "elasticsearch",
+              "cluster_uuid" : "BgdIyCXxSPGeRusvb6-_Qw",
+              "version" : {
+                "number" : "7.17.6",
+                "build_flavor" : "default",
+                "build_type" : "rpm",
+                "build_hash" : "f65e9d338dc1d07b642e14a27f338990148ee5b6",
+                "build_date" : "2022-08-23T11:08:48.893373482Z",
+                "build_snapshot" : false,
+                "lucene_version" : "8.11.1",
+                "minimum_wire_compatibility_version" : "6.8.0",
+                "minimum_index_compatibility_version" : "6.0.0-beta1"
+              },
+              "tagline" : "You Know, for Search"
+            }
+      ```
+      </details>
+
+
+ 
+
+
+
+
 ### Step 4: Wazuh Installation
 
  - **Add the Wazuh repository:**
@@ -140,6 +175,34 @@
       ```
 
 
+### Step 5: Filebeat Installation
+
+ - **Install the Filebeat package:**
+
+apt-get install filebeat=7.17.6
+
+
+ - **Download pre-configured Filebeat config file:**
+
+
+curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/4.3/tpl/elastic-basic/filebeat_all_in_one.yml
+
+ - **Download the alerts template for Elasticsearch:**
+
+
+curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/4.3/extensions/elasticsearch/wazuh-template.json
+chmod go+r /etc/filebeat/wazuh-template.json
+
+
+ - **Download the Wazuh module for Filebeat:**
+
+
+curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.2.tar.gz | tar -xvz -C /usr/share/filebeat/module
+
+ - **Edit the Filebeat configuration file to add Elasticsearch password:**
+
+
+output.elasticsearch.password: <elasticsearch_password>
 
 
 
