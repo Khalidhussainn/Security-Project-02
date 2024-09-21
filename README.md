@@ -39,5 +39,47 @@
       curl -so /etc/elasticsearch/elasticsearch.yml https://packages.wazuh.com/4.3/tpl/elastic-basic/elasticsearch_all_in_one.yml
       ```
 
-    
+### Step 3: Certificates Creation
+
+ - **Download configuration file for creating certificates:**
+
+      ```bash
+      curl -so /usr/share/elasticsearch/instances.yml https://packages.wazuh.com/4.3/tpl/elastic-basic/instances_aio.yml
+      ```
+
+ - **Create certificates using the elasticsearch-certutil tool:**
+      ```bash
+      /usr/share/elasticsearch/bin/elasticsearch-certutil cert ca --pem --in instances.yml --keep-ca-key --out ~/certs.zip
+      ```
+
+
+ - **Extract the generated certificates:**
+      ```bash
+      unzip ~/certs.zip -d ~/certs
+      ```
+
+ - **Copy certificates to the Elasticsearch directory:**
+      ```bash
+      mkdir /etc/elasticsearch/certs/ca -p
+      cp -R ~/certs/ca/ ~/certs/elasticsearch/* /etc/elasticsearch/certs/
+      chown -R elasticsearch: /etc/elasticsearch/certs
+      chmod -R 500 /etc/elasticsearch/certs
+      chmod 400 /etc/elasticsearch/certs/ca/ca.* /etc/elasticsearch/certs/elasticsearch.*
+      rm -rf ~/certs/ ~/certs.zip
+      ```
+
+
+ - **Enable and start the Elasticsearch service:**
+      ```bash
+      systemctl daemon-reload
+      systemctl enable elasticsearch
+      systemctl start elasticsearch
+      ```
+
+
+ - **Generate credentials for pre-built roles and users:**
+      ```bash
+      /usr/share/elasticsearch/bin/elasticsearch-setup-passwords auto
+      ```
+
 
