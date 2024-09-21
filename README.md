@@ -217,7 +217,11 @@
          <summary>Output</summary>   
       
       ```bash
+      .
+      .
       output.elasticsearch.password: <elasticsearch_password>
+      .
+      .
       ```
       </details>
 
