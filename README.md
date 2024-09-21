@@ -82,15 +82,9 @@
       /usr/share/elasticsearch/bin/elasticsearch-setup-passwords auto
       ```
 
-      - **from Above command the ###output look like this :**
-```bash
-     
-
-```
-<details>
-  <summary>Click to expand!</summary>
-  
-  Content inside the drop-down goes here.
-
-</details>
-
+   - **<summary>Outout</summary>**
+   ```bash
+      <details>
+         Content inside the drop-down goes here.
+      </details>
+   ```
