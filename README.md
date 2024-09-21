@@ -82,8 +82,8 @@
       /usr/share/elasticsearch/bin/elasticsearch-setup-passwords auto
       ```
 
- - **from Above command the ###output look like this :**
-      ```bash
+      - **from Above command the ###output look like this :**
+            ```bash
      
                               Changed password for user apm_system
                               PASSWORD apm_system = lLPZhZkB6oUOzzCrkLSF
@@ -105,6 +105,6 @@
                               
                               Changed password for user elastic
                               PASSWORD elastic = AN4UeQGA7HGl5iHpMla7
-      ```
+        ```
 
 
