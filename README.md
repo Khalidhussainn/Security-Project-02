@@ -173,7 +173,10 @@
       systemctl enable wazuh-manager
       systemctl start wazuh-manager
       ```
-
+ - **Run the following command to check if the Wazuh manager is active:**
+      ```bash
+      systemctl status wazuh-manager
+      ```
 
 ### Step 5: Filebeat Installation
 
@@ -207,13 +210,23 @@
 
 
 
- - **Edit the Filebeat configuration file to add Elasticsearch password:**
+
       ```bash
       output.elasticsearch.password: <elasticsearch_password>
       ```
 
+ - **Edit the Filebeat configuration file to add Elasticsearch password:**
+      ```bash
+      nano /etc/filebeat/filebeat.yml
+      ```
 
-
+      <details>
+         <summary>Output</summary>   
+      
+      ```bash
+      output.elasticsearch.password: <elasticsearch_password>
+      ```
+      </details>
 
 
       
