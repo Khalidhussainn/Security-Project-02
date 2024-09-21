@@ -86,26 +86,26 @@
          <summary>Output</summary>   
       
       ```bash
-      - Changed password for user apm_system  
-        PASSWORD apm_system = lLPZhZkB6oUOzzCrkLSF
-      
-      - Changed password for user kibana_system  
-        PASSWORD kibana_system = TaLqVOnSoqKTYLIU0vDn
-      
-      - Changed password for user kibana  
-        PASSWORD kibana = TaLqVOvXoqKTYLIU0vDn
-      
-      - Changed password for user logstash_system  
-        PASSWORD logstash_system = UtuDv2tWkXGYL83v9kWA
-      
-      - Changed password for user beats_system  
-        PASSWORD beats_system = qZcbvCslafMpoEOrE9Ob
-      
-      - Changed password for user remote_monitoring_user  
-        PASSWORD remote_monitoring_user = LzJpQiSylncmCU2GLBTS
-      
-      - Changed password for user elastic  
-        PASSWORD elastic = AN4UeQGA7HGl5iHpMla7
+            Changed password for user apm_system  
+                    PASSWORD apm_system = lLPZhZkB6oUOzzCrkLSF
+                  
+            Changed password for user kibana_system  
+                    PASSWORD kibana_system = TaLqVOnSoqKTYLIU0vDn
+                  
+            Changed password for user kibana  
+                    PASSWORD kibana = TaLqVOvXoqKTYLIU0vDn
+                  
+            Changed password for user logstash_system  
+                    PASSWORD logstash_system = UtuDv2tWkXGYL83v9kWA
+                  
+            Changed password for user beats_system  
+                    PASSWORD beats_system = qZcbvCslafMpoEOrE9Ob
+                  
+            Changed password for user remote_monitoring_user  
+                    PASSWORD remote_monitoring_user = LzJpQiSylncmCU2GLBTS
+                  
+            Changed password for user elastic  
+                    PASSWORD elastic = AN4UeQGA7HGl5iHpMla7
       ```
       </details>
 
@@ -178,31 +178,41 @@
 ### Step 5: Filebeat Installation
 
  - **Install the Filebeat package:**
+      ```bash
+      apt-get install filebeat=7.17.6
+      ```
 
-apt-get install filebeat=7.17.6
 
 
  - **Download pre-configured Filebeat config file:**
+      ```bash
+      curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/4.3/tpl/elastic-basic/filebeat_all_in_one.yml
+      ```
 
 
-curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/4.3/tpl/elastic-basic/filebeat_all_in_one.yml
 
  - **Download the alerts template for Elasticsearch:**
 
+      ```bash
+      curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/4.3/extensions/elasticsearch/wazuh-template.json
+      chmod go+r /etc/filebeat/wazuh-template.json
+      ```
 
-curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/4.3/extensions/elasticsearch/wazuh-template.json
-chmod go+r /etc/filebeat/wazuh-template.json
 
 
  - **Download the Wazuh module for Filebeat:**
+      ```bash
+      curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.2.tar.gz | tar -xvz -C /usr/share/filebeat/module
+      ```
 
 
-curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.2.tar.gz | tar -xvz -C /usr/share/filebeat/module
 
  - **Edit the Filebeat configuration file to add Elasticsearch password:**
+      ```bash
+      output.elasticsearch.password: <elasticsearch_password>
+      ```
 
 
-output.elasticsearch.password: <elasticsearch_password>
 
 
 
