@@ -82,7 +82,7 @@
       /usr/share/elasticsearch/bin/elasticsearch-setup-passwords auto
       ```
 
-<details>
+ - **<details>**
    <summary>Output</summary>   
 
 ```bash
