@@ -1,39 +1,45 @@
-# Step-by-Step Wazuh Installation and integrating with ELK Stack
+# Step-by-Step Wazuh Installation and Integrating with ELK Stack
 
-### Step 1 Wazuh Installation
 
-   - **Create a Directory for Wazuh**
+### Step 1: Install Prerequisites
+
+   - **Install necessary packages:**
       ```bash
-      mkdir wazuh
-      cd wazuh
+      apt-get install apt-transport-https zip unzip lsb-release curl gnupg
       ```
+### Step 2: Elasticsearch Installation
 
-   - **Download the Wazuh Installation Script**
+
+   - **Install the GPG key:**
 
       ```bash
-      wget https://packages.wazuh.com/4.9/wazuh-install.sh
+      curl -s https://artifacts.elastic.co/GPG-KEY-elasticsearch | gpg --no-default-keyring --keyring gnupg-ring:/usr/share/keyrings/elasticsearch.gpg --import && chmod 644 /usr/share/keyrings/elasticsearch.gpg
       ```
-   - **Download config.yml file with the following command:**
+   - **Add the Elastic Stack repository:**
    
       ```bash
-      wget https://packages.wazuh.com/4.9/config.yml
+      echo "deb [signed-by=/usr/share/keyrings/elasticsearch.gpg] https://artifacts.elastic.co/packages/7.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-7.x.list
       ```
 
-   - **Switch to Root User**
-
-      ```bash
-      sudo su
-      ```
-   - **Make the Installation Script Executable**
+   - **Update the package information:**
 
       ```bash
-      chmod +x wazuh-install.sh
+      apt-get update
       ```
-   - **Edit the Configuration File**
+
+      
+   - **Install Elasticsearch:**
 
       ```bash
-      nano config.yml
+      apt-get install elasticsearch=7.17.6
       ```
+   - **Download the configuration file:**
+
+      ```bash
+      curl -so /etc/elasticsearch/elasticsearch.yml https://packages.wazuh.com/4.3/tpl/elastic-basic/elasticsearch_all_in_one.yml
+      ```
+
+      
    - **Generate Configuration Files**
 
       ```bash
