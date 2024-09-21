@@ -82,7 +82,7 @@
       /usr/share/elasticsearch/bin/elasticsearch-setup-passwords auto
       ```
 
- - **<details>
+<details>
    <summary>Output</summary>   
 
 ```bash
@@ -106,7 +106,5 @@
 
 - Changed password for user elastic  
   PASSWORD elastic = AN4UeQGA7HGl5iHpMla7
-
 ```
-</details>**
 
