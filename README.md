@@ -330,3 +330,24 @@
       systemctl enable kibana
       systemctl start kibana
       ```
+
+
+
+
+
+## Access Kibana Web Interface
+ - **URL:**
+      ```bash
+      https://<wazuh_server_ip>
+      ```
+      
+ - **User:**
+      ```bash
+      elastic
+      ```
+     
+ - **Password:**
+      ```bash
+      <PASSWORD_elastic>
+      ```
+
