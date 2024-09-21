@@ -208,13 +208,6 @@
       curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.2.tar.gz | tar -xvz -C /usr/share/filebeat/module
       ```
 
-
-
-
-      ```bash
-      output.elasticsearch.password: <elasticsearch_password>
-      ```
-
  - **Edit the Filebeat configuration file to add Elasticsearch password:**
       ```bash
       nano /etc/filebeat/filebeat.yml
@@ -228,5 +221,16 @@
       ```
       </details>
 
+ - **Copy the certificates into /etc/filebeat/certs/**
+      ```bash
+      cp -r /etc/elasticsearch/certs/ca/ /etc/filebeat/certs/
+      cp /etc/elasticsearch/certs/elasticsearch.crt /etc/filebeat/certs/filebeat.crt
+      cp /etc/elasticsearch/certs/elasticsearch.key /etc/filebeat/certs/filebeat.key
+      ```
 
-      
+ - **Enable and start the Filebeat service:**
+      ```bash
+      systemctl daemon-reload
+      systemctl enable filebeat
+      systemctl start filebeat
+      ```
