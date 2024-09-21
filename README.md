@@ -107,7 +107,7 @@
 - Changed password for user elastic  
   PASSWORD elastic = AN4UeQGA7HGl5iHpMla7
 ```
-
+</details>
 ### Step 4: Wazuh Installation
 
  - **Add the Wazuh repository:**
