@@ -286,7 +286,7 @@
 
  - **Edit the kibana file to add the Password:**
       ```bash
-      /etc/kibana/kibana.yml
+      nano /etc/kibana/kibana.yml
       ```
 
       <details>
