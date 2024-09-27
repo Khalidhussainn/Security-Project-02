@@ -126,6 +126,4 @@
     http://<KIBANA_IP>:5601
     ```
 
-2. **Use the Kibana Interface**
 
-    Visualize Wazuh alerts and monitor your environment.
